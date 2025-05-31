@@ -1,0 +1,18 @@
+SIMULATOR_SCREEN_SIZE = (1200,720)
+DEFAULT_COLOR = (240,240,240)
+
+## COLOR CONSTANTS
+OFF_WHITE = (220,220,200)
+TENNIS_GREEN = (204,255,0)
+RUBBER_RED = (255,0,0)
+METAL_GRAY = (160,160,160)
+PLASTIC_BLUE = (0,128, 255)
+SPONGUE_ORANGE = (255,204,153)
+
+
+## SLECTION MENU
+BALL_META = {
+    "tennis_ball":{
+        "image": r"constants\images\tennis_ball.png"
+    }
+}

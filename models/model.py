@@ -16,12 +16,16 @@ class Sphere:
     """
     def __init__(self, radius:int=20, weight:int=10, x:int=100,y:int=100, color=(255,0,0)):
         self.x = x
-        self.y = y 
+        self.y = y
+        self.name = None 
         self.radius = radius
         self.color = color
         self.weight = weight
         self.image = None
 
+
+    def __repr__(self):
+        return f"Sphere(name={self.name}, image={self.image}, weight={self.weight}, radius={self.radius})"
 
     ## SETTERS
     def set_radius(self, radius:int):
@@ -31,10 +35,16 @@ class Sphere:
         self.weight = weight
 
     def set_image(self, image_url:str):
-        self.image = pygame.image.load(image_url)
+        """
+        Converts image_url to a surface object
+        """
+        self.image = image_url
 
     def set_color(self, object_color:tuple):
         self.color = object_color
+
+    def set_name(self, object_name:str):
+        self.name = object_name
 
     ## ACTION
     def draw(self, screen):
@@ -42,7 +52,8 @@ class Sphere:
         Draws the sphere surface on surface
         """
         if self.image:
-            screen.blit(self.image, (self.x, self.y))
+            image = pygame.image.load(self.image)
+            screen.blit(image, (self.x, self.y))
         else:
             pygame.draw.circle(surface=screen, color=self.color, center=(self.x, self.y), radius=self.radius)
 
@@ -50,26 +61,17 @@ class Sphere:
 
 
 class SphereBuilder:
+    """
+    SphereBuilder class is responsible for building custom spheres on basis of attributes provided
+    """
     def __init__(self):
         self.sphere = Sphere()
 
-    ## CONVIENCE METHODS
-    def plastic_ball(self):
-        return self.addColor(PLASTIC_BLUE).build()
-    
-    def rubber_ball(self):
-        return self.addColor(RUBBER_RED).build()
-    
-    def tennis_ball(self):
-        return self.addColor(TENNIS_GREEN).build()
-
-    def metal_ball(self):
-        return self.addColor(METAL_GRAY).build()
-    
-    def sponge_ball(self):
-        return self.addColor(SPONGUE_ORANGE).build()
-
     ## BASE METHODS
+    def addName(self, object_name:str):
+        self.sphere.set_name(object_name=object_name)
+        return self 
+
     def addWeight(self, weight:int):
         self.sphere.set_weight(weight=weight)
         return self 
